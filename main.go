@@ -4,9 +4,9 @@ package main
 
 import (
 	"fmt"
-"io/ioutil"
+	"io/ioutil"
 	"log"
-				"net/http"
+	"net/http"
 )
 
 func main() {
@@ -25,7 +25,5 @@ func SoapServer(w http.ResponseWriter, req *http.Request) {
 	}
 	fmt.Printf("\n%s\n", b)
 	fmt.Printf("%s\n", req.Header)
-
-
 
 }
