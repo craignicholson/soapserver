@@ -24,6 +24,8 @@ func SoapServer(w http.ResponseWriter, req *http.Request) {
 		log.Fatal(err)
 	}
 	fmt.Printf("\n%s\n", b)
-	fmt.Printf("%s\n", req.Header)
 
+	for k, v := range req.Header {
+		log.Println("key:", k, "value:", v)
+	}
 }
