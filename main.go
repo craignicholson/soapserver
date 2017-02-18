@@ -19,13 +19,19 @@ func SoapServer(w http.ResponseWriter, req *http.Request) {
 
 	defer req.Body.Close()
 
+	//io.WriteString(w, "hello, world!\n")
 	b, err := ioutil.ReadAll(req.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("\n%s\n", b)
 
+	fmt.Printf("*******************\n")
+
+	//Print the headers
 	for k, v := range req.Header {
-		log.Println("key:", k, "value:", v)
+		log.Println(k, "=", v)
 	}
+
+	//Print the body
+	fmt.Printf("\n%s\n", b)
 }
