@@ -29,7 +29,7 @@ func SoapServer(w http.ResponseWriter, req *http.Request) {
 
 	//Print the headers
 	for k, v := range req.Header {
-		log.Println(k, "=", v)
+		log.Println(k, ":", v)
 	}
 
 	//Print the body
