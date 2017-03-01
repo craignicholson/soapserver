@@ -1,5 +1,3 @@
-//  http://giantmachines.tumblr.com/post/49002286919/dealing-with-soap-xml-requests-in-golang
-
 package main
 
 import (
@@ -8,6 +6,20 @@ import (
 	"log"
 	"net/http"
 )
+
+type jobIDResponse struct {
+	JobID string
+}
+
+var data = `
+<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">    
+ <SOAP-ENV:Header/>    
+  <SOAP-ENV:Body>       
+    <ns10:JobIDResponse xmlns:ns10="urn:com:ssn:schema:service:v2.1:JobManager.xsd">
+      <ns10:JobID>4686</ns10:JobID>       
+    </ns10:JobIDResponse>    
+  </SOAP-ENV:Body> 
+</SOAP-ENV:Envelope>`
 
 func main() {
 	http.HandleFunc("/soapserver", SoapServer)
@@ -34,4 +46,17 @@ func SoapServer(w http.ResponseWriter, req *http.Request) {
 
 	//Print the body
 	fmt.Printf("\n%s\n", b)
+
+	//Render some xml
+	// response := jobIDResponse{"123456"}
+	// x, err := xml.MarshalIndent(response, "", "  ")
+	// if err != nil {
+	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
+
+	var soapresponse = []byte(data)
+
+	w.Header().Set("Content-Type", "text/xml")
+	w.Write(soapresponse)
 }
