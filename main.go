@@ -22,6 +22,8 @@ var data = `
 </SOAP-ENV:Envelope>`
 
 func main() {
+	fmt.Printf("Endpoint listening for http requests here:\n")
+	fmt.Printf("http://localhost:8081/soapserver\n")
 	http.HandleFunc("/soapserver", SoapServer)
 	log.Fatal(http.ListenAndServe(":8081", nil))
 }
